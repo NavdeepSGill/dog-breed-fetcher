@@ -21,7 +21,7 @@ public class CachingBreedFetcher implements BreedFetcher {
     }
 
     @Override
-    public List<String> getSubBreeds(String breed) {
+    public List<String> getSubBreeds(String breed) throws BreedNotFoundException {
         List<String> cached = cache.get(breed);
         if (cached != null) {
             return new ArrayList<>(cached);
@@ -29,7 +29,6 @@ public class CachingBreedFetcher implements BreedFetcher {
 
         callsMade++;
         List<String> breeds = fetcher.getSubBreeds(breed);
-        System.out.println("hello");
         cache.put(breed, breeds);
         return breeds;
 
